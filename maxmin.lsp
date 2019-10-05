@@ -1,0 +1,11 @@
+
+(defun maxmin (l max min)
+  (if (null l)
+    (values max min)
+    (if (> (car l) max)
+      (if (< (car l) min)
+        (maxmin (cdr l) (car l) (car l))
+        (maxmin (cdr l) (car l) min))
+      (if (< (car l) min)
+        (maxmin (cdr l) max (car l))
+        (maxmin (cdr l) max min)))))
