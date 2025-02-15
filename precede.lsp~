@@ -1,0 +1,31 @@
+
+(defun precedesi (x v)
+  (let ((acc nil))
+    (do ((i 1 (+ i 1)))
+	((> i (- (length v) 1)) acc)
+      (if (or (= (length v) 1) (null v))
+	  (return nil)
+	  (let ((char (aref v (- i 1))))
+	    (if (and (eql (aref v i) x) (not (member char acc)))
+		(setf acc (cons char acc))))))))
+	  
+(defun str->list (str)
+  (let ((acc nil))
+    (dotimes (x (length str) (reverse acc))
+      (setf acc (cons (char str x) acc)))))
+
+
+(defun precedesr (x v)
+  (setf acc nil)
+  (precedesracc x (str->list v))
+  acc)
+
+(defun precedesracc (x v)
+  (if (or (null v) (= (length v) 1))
+      nil
+      (let ((char (car (cdr v))))
+	(if (and (eql x char) (not (member (car v) acc)))
+	    (progn
+	      (setf acc (cons (car v) acc))
+	      (precedesracc x (cdr v)))
+	    (precedesracc x (cdr v))))))

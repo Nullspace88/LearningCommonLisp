@@ -1,0 +1,2 @@
+
+(setf letfunc (lambda (x y) (cons x x)) (car y) y)

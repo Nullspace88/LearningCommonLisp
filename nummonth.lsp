@@ -1,0 +1,25 @@
+
+(defconstant month
+  #(0 31 59 90 120 151 181 212 243 273 304 334 365))
+
+(defun leap? (y)
+  (and (zerop (mod y 4))
+       (or (zerop (mod y 400))
+	   (not (zerop (mod y 100))))))
+
+(defun month-num (m y)
+  (+ (case (- m 1)
+       (0 0)
+       (1 31)
+       (2 59)
+       (3 90)
+       (4 120)
+       (5 151)
+       (6 181)
+       (7 212)
+       (8 243)
+       (9 273)
+       (10 304)
+       (11 334)
+       (12 365))
+     (if (and (> m 2) (leap? y)) 1 0)))

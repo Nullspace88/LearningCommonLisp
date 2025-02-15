@@ -1,0 +1,20 @@
+
+(defun onediff (lst)
+  (if (or (= (length lst) 1) (null lst))
+      t
+      (if (= (abs (- (car lst) (car (cdr lst)))) 1)
+	  (onediff (cdr lst))
+	  nil)))
+
+(defun onediffdo (lst)
+  (do ((i 0 (+ i 1)))
+      ((>= i (- (length lst) 1)) t)
+    (if (not (= (abs (- (elt lst i) (elt lst (+ i 1)))) 1))
+	(return nil))))
+
+(defun onediffmc (lst)
+  (mapc #'(lambda (x y)
+	      (if (not (= (abs (- x y)) 1))
+		  (return-from onediffmc nil)))
+	lst (cdr lst)))
+	
